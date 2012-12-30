@@ -505,8 +505,8 @@ class Twython(object):
             raise TwythonError('getProfileImageUrl() threw an error.',
                                 error_code=response.status_code)
 
-    @staticmethod
-    def stream(data, callback):
+    def stream(self, data, callback):
+        print "HERE"
         """A Streaming API endpoint, because requests (by Kenneth Reitz)
             makes this not stupidly annoying to implement.
 
@@ -535,29 +535,34 @@ class Twython(object):
                              Twitter <3's you feel free to set this to your
                              wildest desires.
         """
-        endpoint = 'https://stream.twitter.com/1/statuses/filter.json'
+        endpoint = 'https://stream.twitter.com/1.1/statuses/filter.json'
         if 'endpoint' in data:
             endpoint = data.pop('endpoint')
+        self.callback = callback
 
-        needs_basic_auth = False
-        if 'username' in data and 'password' in data:
-            needs_basic_auth = True
-            username = data.pop('username')
-            password = data.pop('password')
+        print "TEst"
+        auth = OAuth1(self.app_key, self.app_secret,
+                      self.oauth_token, self.oauth_token_secret,
+                      signature_type='auth_header')
 
-        if needs_basic_auth:
-            stream = requests.post(endpoint,
-                                   data=data,
-                                   auth=(username, password))
-        else:
-            stream = requests.post(endpoint, data=data)
+        stream = requests.post(endpoint,
+            data=data,
+            auth=auth,
+            hooks=dict(response=self.handle_tweet))
 
-        for line in stream.iter_lines():
+    def handle_tweet(self, stream):
+        json_error = False
+        for line in stream.iter_lines(chunk_size=1):
             if line:
                 try:
-                    callback(simplejson.loads(line))
+                    content = simplejson.loads(line)
+                    self.callback(simplejson.loads(line))
                 except ValueError:
-                    raise TwythonError('Response was not valid JSON, unable to decode.')
+                    json_error = True
+                    content = {}
+                    print line
+        if json_error:
+            raise TwythonError('Response was not valid JSON, unable to decode.')
 
     @staticmethod
     def unicode2utf8(text):
