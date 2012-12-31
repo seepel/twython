@@ -16,119 +16,53 @@
 base_url = 'http://api.twitter.com/{{version}}'
 
 api_table = {
-    'getRateLimitStatus': {
-        'url': '/account/rate_limit_status.json',
-        'method': 'GET',
-    },
-
-    'verifyCredentials': {
-        'url': '/account/verify_credentials.json',
-        'method': 'GET',
-    },
-
-    'endSession': {
-        'url': '/account/end_session.json',
-        'method': 'POST',
-    },
-
     # Timeline methods
-    'getHomeTimeline': {
-        'url': '/statuses/home_timeline.json',
-        'method': 'GET',
+    'getMentionsTimeline' : {
+        'url' : '/statuses/mentions_timeline.json',
+        'method' : 'GET',
     },
     'getUserTimeline': {
         'url': '/statuses/user_timeline.json',
         'method': 'GET',
     },
-
-    # Interfacing with friends/followers
-    'getUserMentions': {
-        'url': '/statuses/mentions.json',
+    'getHomeTimeline': {
+        'url': '/statuses/home_timeline.json',
         'method': 'GET',
     },
-    'createFriendship': {
-        'url': '/friendships/create.json',
-        'method': 'POST',
-    },
-    'destroyFriendship': {
-        'url': '/friendships/destroy.json',
-        'method': 'POST',
-    },
-    'getFriendsIDs': {
-        'url': '/friends/ids.json',
-        'method': 'GET',
-    },
-    'getFollowersIDs': {
-        'url': '/followers/ids.json',
-        'method': 'GET',
-    },
-    'getFriendsList': {
-        'url': '/friends/list.json',
-        'method': 'GET',
-    },
-    'getFollowersList': {
-        'url': '/followers/list.json',
-        'method': 'GET',
-    },
-    'getIncomingFriendshipIDs': {
-        'url': '/friendships/incoming.json',
-        'method': 'GET',
-    },
-    'getOutgoingFriendshipIDs': {
-        'url': '/friendships/outgoing.json',
-        'method': 'GET',
+    'getRetweetsOfMe' : {
+        'url' : '/statuses/retweets_of_me.json',
+        'method' : 'GET',
     },
 
-    # Retweets
-    'reTweet': {
-        'url': '/statuses/retweet/{{id}}.json',
-        'method': 'POST',
-    },
+    # Tweet methods
     'getRetweets': {
         'url': '/statuses/retweets/{{id}}.json',
         'method': 'GET',
     },
-    'retweetedOfMe': {
-        'url': '/statuses/retweets_of_me.json',
-        'method': 'GET',
-    },
-    'retweetedByMe': {
-        'url': '/statuses/retweeted_by_me.json',
-        'method': 'GET',
-    },
-    'retweetedToMe': {
-        'url': '/statuses/retweeted_to_me.json',
-        'method': 'GET',
-    },
-
-    # User methods
-    'showUser': {
-        'url': '/users/show.json',
-        'method': 'GET',
-    },
-    'searchUsers': {
-        'url': '/users/search.json',
-        'method': 'GET',
-    },
-
-    'lookupUser': {
-        'url': '/users/lookup.json',
-        'method': 'GET',
-    },
-
-    # Status methods - showing, updating, destroying, etc.
     'showStatus': {
         'url': '/statuses/show.json',
         'method': 'GET',
-    },
-    'updateStatus': {
-        'url': '/statuses/update.json',
-        'method': 'POST',
     },
     'destroyStatus': {
         'url': '/statuses/destroy/{{id}}.json',
         'method': 'POST',
     },
+    'updateStatus': {
+        'url': '/statuses/update.json',
+        'method': 'POST',
+    },
+    'reTweet': {
+        'url': '/statuses/retweet/{{id}}.json',
+        'method': 'POST',
+    },
+    # update_with_media
+    'getOembedTweet': {
+        'url': '/statuses/oembed.json',
+        'method': 'GET',
+    },
+
+    # Search methods
+    # search tweets
 
     # Direct Messages - getting, sending, effing, etc.
     'getDirectMessages': {
@@ -139,6 +73,10 @@ api_table = {
         'url': '/direct_messages/sent.json',
         'method': 'GET',
     },
+    'showDirectMessages' : {
+        'url' : '/direct_messages/show.json',
+        'method' : 'GET',
+    },
     'sendDirectMessage': {
         'url': '/direct_messages/new.json',
         'method': 'POST',
@@ -148,49 +86,84 @@ api_table = {
         'method': 'POST',
     },
 
-    # Friendship methods
-    'checkIfFriendshipExists': {
-        'url': '/friendships/exists.json',
+    # Friends & Followers
+    'getFriendsIDs': {
+        'url': '/friends/ids.json',
         'method': 'GET',
+    },
+    'getFollowersIDs': {
+        'url': '/followers/ids.json',
+        'method': 'GET',
+    },
+    'lookupFriendships' : {
+        'url' : '/friendships/lookup.json',
+        'method' : 'GET',
+    },
+    'getIncomingFriendshipIDs': {
+        'url': '/friendships/incoming.json',
+        'method': 'GET',
+    },
+    'getOutgoingFriendshipIDs': {
+        'url': '/friendships/outgoing.json',
+        'method': 'GET',
+    },
+    'createFriendship': {
+        'url': '/friendships/create.json',
+        'method': 'POST',
+    },
+    'destroyFriendship': {
+        'url': '/friendships/destroy.json',
+        'method': 'POST',
+    },
+    'updateFriendship' : {
+        'url' : '/friendships/update.json',
+        'method' : 'POST',
     },
     'showFriendship': {
         'url': '/friendships/show.json',
         'method': 'GET',
     },
+    'getFriendsList': {
+        'url': '/friends/list.json',
+        'method': 'GET',
+    },
+    'getFollowersList' : {
+        'url': '/followers/list.json',
+        'method': 'GET',
+    },
 
-    # Profile methods
+    # Users
+    'getAccountSettings' : {
+        'url' : '/account/settings.json',
+        'method' : 'GET',
+    },
+    'verifyCredentials': {
+        'url': '/account/verify_credentials.json',
+        'method': 'GET',
+    },
+    'updateAccountSettings' : {
+        'url' : '/account/settings.json',
+        'method' : 'POST',
+    },
+    'updateDeliveryDevice' : {
+        'url' : '/account/update_delivery_device.json',
+        'method' : 'POST',
+    },
     'updateProfile': {
         'url': '/account/update_profile.json',
         'method': 'POST',
     },
+    # updateProfileBackgroundImage
     'updateProfileColors': {
         'url': '/account/update_profile_colors.json',
         'method': 'POST',
     },
-    'myTotals': {
-        'url': '/account/totals.json',
+    # updateProfileImage
+    # getBlocksIds
+    'getBlockedIDs': {
+        'url': '/blocks/blocking/ids.json',
         'method': 'GET',
     },
-    'removeProfileBanner': {
-        'url': '/account/remove_profile_banner.json',
-        'method': 'POST',
-    },
-
-    # Favorites methods
-    'getFavorites': {
-        'url': '/favorites.json',
-        'method': 'GET',
-    },
-    'createFavorite': {
-        'url': '/favorites/create/{{id}}.json',
-        'method': 'POST',
-    },
-    'destroyFavorite': {
-        'url': '/favorites/destroy/{{id}}.json',
-        'method': 'POST',
-    },
-
-    # Blocking methods
     'createBlock': {
         'url': '/blocks/create/{{id}}.json',
         'method': 'POST',
@@ -199,44 +172,150 @@ api_table = {
         'url': '/blocks/destroy/{{id}}.json',
         'method': 'POST',
     },
-    'getBlocking': {
-        'url': '/blocks/blocking.json',
+    'lookupUser': {
+        'url': '/users/lookup.json',
         'method': 'GET',
     },
-    'getBlockedIDs': {
-        'url': '/blocks/blocking/ids.json',
+    'showUser': {
+        'url': '/users/show.json',
         'method': 'GET',
     },
-    'checkIfBlockExists': {
-        'url': '/blocks/exists.json',
+    'searchUsers': {
+        'url': '/users/search.json',
         'method': 'GET',
+    },
+    'getUserContributees' : {
+        'url' : '/users/contributees.json',
+        'method' : 'POST',
+    },
+    'getUserContributors' : {
+        'url' : '/users/contributors.json',
+        'method' : 'POST',
+    },
+    'removeProfileBanner' : {
+        'url': '/account/remove_profile_banner.json',
+        'method': 'POST',
+    },
+    'updateProfileBanner' : {
+        'url' : '/account/update_profile_banner.json',
+        'method' : 'POST',
+    },
+    'getProfileBanner' : {
+        'url' : '/users/profile_banner.json',
+        'method' : 'GET',
+    }, 
+
+    # Suggested Users
+    'getSuggestionsByCategory' : {
+        'url' : '/users/suggestions/{{slug}}.json',
+        'method' : 'GET',
+    },
+    'getSuggestions' : {
+        'url' : '/users/suggestions',
+        'method' : 'GET',
+    },
+    'getSuggestionStatusesByCategory' : {
+        'url' : '/users/suggestions/{{slug}}/members.json',
+        'method' : 'GET',
     },
 
-    # Trending methods
-    'getCurrentTrends': {
-        'url': '/trends/current.json',
+    # Favorites
+    'getFavoritesList' : {
+        'url' : '/favorites/list.json',
+        'method' : 'GET',
+    },
+    'destroyFavorite' : {
+        'url' : '/favorites/destroy.json',
+        'method' : 'GET',
+    },
+    'createFavorite' : {
+        'url' : '/favorites/create.json',
+        'method' : 'GET',
+    },
+
+    # List API methods/endpoints. Fairly exhaustive and annoying in general. ;P
+    'showLists': {
+        'url': '/lists/list.json',
         'method': 'GET',
     },
-    'getDailyTrends': {
-        'url': '/trends/daily.json',
+    'getListStatuses': {
+        'url': '/lists/statuses.json',
+        'method': 'GET'
+    },
+    'deleteListMember': {
+        'url': '/lists/members/destroy.json',
+        'method': 'POST',
+    },
+    'getListMemberships': {
+        'url': '/lists/memberships.json',
         'method': 'GET',
     },
-    'getWeeklyTrends': {
-        'url': '/trends/weekly.json',
+    'getListSubscribers': {
+        'url': '/lists/subscribers.json',
         'method': 'GET',
     },
-    'availableTrends': {
-        'url': '/trends/available.json',
+    'subscribeToList': {
+        'url': '/lists/subscribers/create.json',
+        'method': 'POST',
+    },
+    'isListSubscriber': {
+        'url': '/lists/subscribers/show.json',
         'method': 'GET',
     },
-    'trendsByLocation': {
-        'url': '/trends/{{woeid}}.json',
+    'unsubscribeFromList': {
+        'url': '/lists/subscribers/destroy.json',
+        'method': 'POST',
+    },
+    'addListMembers' : {
+        'url' : '/lists/members/create_all.json',
+        'method' : 'POST',
+    },
+    'isListMember': {
+        'url': '/lists/members/show.json',
+        'method': 'GET',
+    },
+    'getListMembers': {
+        'url': '/lists/members.json',
+        'method': 'GET',
+    },
+    'addListMember': {
+        'url': '/lists/members/create.json',
+        'method': 'POST',
+    },
+    'deleteList': {
+        'url': '/lists/destroy.json',
+        'method': 'POST',
+    },
+    'updateList': {
+        'url': '/lists/update.json',
+        'method': 'POST',
+    },
+    'createList': {
+        'url': '/lists/create.json',
+        'method': 'POST',
+    },
+    'getSpecificList': {
+        'url': '/lists/show.json',
+        'method': 'GET',
+    },
+    'getListSubscriptions': {
+        'url': '/lists/subscriptions.json',
+        'method': 'GET',
+    },
+    'destroyListMembers' : {
+        'url' : '/lists/members/destroy_all.json',
+        'method' : 'GET',
+    },
+
+
+    'getListTimeline': {
+        'url': '/{{username}}/lists/{{list_id}}/statuses.json',
         'method': 'GET',
     },
 
     # Saved Searches
     'getSavedSearches': {
-        'url': '/saved_searches.json',
+        'url': '/saved_searches/list.json',
         'method': 'GET',
     },
     'showSavedSearch': {
@@ -252,95 +331,32 @@ api_table = {
         'method': 'GET',
     },
 
-    # List API methods/endpoints. Fairly exhaustive and annoying in general. ;P
-    'createList': {
-        'url': '/lists/create.json',
-        'method': 'POST',
-    },
-    'updateList': {
-        'url': '/lists/update.json',
-        'method': 'POST',
-    },
-    'showLists': {
-        'url': '/lists.json',
-        'method': 'GET',
-    },
-    'getListMemberships': {
-        'url': '/lists/memberships.json',
-        'method': 'GET',
-    },
-    'getListSubscriptions': {
-        'url': '/lists/subscriptions.json',
-        'method': 'GET',
-    },
-    'isListSubscriber': {
-        'url': '/lists/subscribers/show.json',
-        'method': 'GET',
-    },
-    'deleteList': {
-        'url': '/lists/destroy.json',
-        'method': 'POST',
-    },
-    'getListTimeline': {
-        'url': '/{{username}}/lists/{{list_id}}/statuses.json',
-        'method': 'GET',
-    },
-    'getSpecificList': {
-        'url': '/lists/show.json',
-        'method': 'GET',
-    },
-    'getListStatuses': {
-        'url': '/lists/statuses.json',
-        'method': 'GET'
-    },
-    'isListMember': {
-        'url': '/lists/members/show.json',
-        'method': 'GET',
-    },
-    'addListMember': {
-        'url': '/lists/members/create.json',
-        'method': 'POST',
-    },
-    'getListMembers': {
-        'url': '/lists/members.json',
-        'method': 'GET',
-    },
-    'deleteListMember': {
-        'url': '/lists/members/destroy.json',
-        'method': 'POST',
-    },
-    'getListSubscribers': {
-        'url': '/lists/subscribers.json',
-        'method': 'GET',
-    },
-    'subscribeToList': {
-        'url': '/lists/subscribers/create.json',
-        'method': 'POST',
-    },
-    'unsubscribeFromList': {
-        'url': '/lists/subscribers/destroy.json',
-        'method': 'POST',
-    },
+    # Places & Geo
+    #getGeoPlace
+    #reverseGeocode
+    #geoSearch
+    #getSimilarPlaces
+    #createGeoPlace
 
-    # The one-offs
-    'notificationFollow': {
-        'url': '/notifications/follow/follow.json',
-        'method': 'POST',
-    },
-    'notificationLeave': {
-        'url': '/notifications/leave/leave.json',
-        'method': 'POST',
-    },
-    'updateDeliveryService': {
-        'url': '/account/update_delivery_device.json',
-        'method': 'POST',
-    },
+    # Trends
+    #getTrendsForPlace
+    #getAvailableTrendLocations
+    #getClosestTrendLocations
+
+    # Spam Reporting
     'reportSpam': {
         'url': '/report_spam.json',
         'method': 'POST',
     },
-    'getOembedTweet': {
-    'url': '/statuses/oembed.json',
+
+
+    # Help
+    #getConfiguration
+    #getLanguages
+    #getPrivacy
+    #getTOS
+    'getRateLimitStatus': {
+        'url': '/account/rate_limit_status.json',
         'method': 'GET',
     },
 }

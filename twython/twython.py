@@ -146,7 +146,7 @@ class Twython(object):
         url = re.sub(
             '\{\{(?P<m>[a-zA-Z_]+)\}\}',
             # The '1' here catches the API version. Slightly hilarious.
-            lambda m: "%s" % kwargs.get(m.group(1), '1'),
+            lambda m: "%s" % kwargs.get(m.group(1), '1.1'),
             base_url + fn['url']
         )
 
@@ -506,7 +506,6 @@ class Twython(object):
                                 error_code=response.status_code)
 
     def stream(self, data, callback):
-        print "HERE"
         """A Streaming API endpoint, because requests (by Kenneth Reitz)
             makes this not stupidly annoying to implement.
 
@@ -540,7 +539,6 @@ class Twython(object):
             endpoint = data.pop('endpoint')
         self.callback = callback
 
-        print "TEst"
         auth = OAuth1(self.app_key, self.app_secret,
                       self.oauth_token, self.oauth_token_secret,
                       signature_type='auth_header')
