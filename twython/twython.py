@@ -550,6 +550,9 @@ class Twython(object):
 
     def handle_tweet(self, stream):
         json_error = False
+        if stream.status_code != 200:
+          self.callback(stream.status_code)
+          return
         for line in stream.iter_lines(chunk_size=1):
             if line:
                 try:
